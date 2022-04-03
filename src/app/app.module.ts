@@ -6,6 +6,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { GroceriesServiceService } from './groceries-service.service';
+import { InputDialogServiceService } from './input-dialog-service.service';
 
 @NgModule({
   declarations: [AppComponent],
