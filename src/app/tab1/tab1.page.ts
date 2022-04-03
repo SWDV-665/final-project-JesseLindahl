@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { AlertController} from '@ionic/angular';
+import { GroceriesServiceService } from '../groceries-service.service';
+import { InputDialogServiceService } from '../input-dialog-service.service';
 
 @Component({
   selector: 'app-tab1',
@@ -12,27 +14,12 @@ export class Tab1Page {
 
   title = "Grocery";
 
-  items = [
-    {
-    name: "Milk",
-    quantity: 2
-    },
-    {
-      name: "Bread",
-      quantity: 1
-    },
-    {
-      name: "Banana",
-      quantity: 3
-    },
-    {
-      name: "Sugar",
-      quantity: 1
-    },
-  ];
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public dataService: GroceriesServiceService, public inputDialogService: InputDialogServiceService) {
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController) {
+  }
 
+  loadItem() {
+    return this.dataService.getItems();
   }
 
   async removeItem(item, index){
@@ -43,7 +30,17 @@ export class Tab1Page {
     });
     (await toast).present();
 
-    this.items.splice(index, 1);
+    this.dataService.removeItem(index);
+  }
+
+  async editItem(item, index) {
+    console.log("Edit Item - ", item, index);
+    const toast = this.toastCtrl.create({
+      message: 'Editing Item - ' + index + "...",
+      duration: 3000
+    });
+    (await toast).present();
+    this.showEditItemPrompt(item, index);
   }
 
   addItem() {
@@ -76,7 +73,42 @@ export class Tab1Page {
           text: 'Save',
           handler: item => {
             console.log('Saved clicked', item);
-            this.items.push(item);
+            this.dataService.addItem(item);
+          }
+        }
+      ]
+    });
+    (await prompt).present();
+  }
+
+  async showEditItemPrompt(item, index) {
+    const prompt = this.alertCtrl.create({
+      //title: 'Edit Item',
+      message: "Please edit item...",
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Name',
+          value: item.name
+        },
+        {
+          name: 'quantity',
+          placeholder: 'Quantity',
+          value: item.quantity
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: item => {
+            console.log('Saved clicked', item);
+            this.dataService.editItem(item, index);
           }
         }
       ]
