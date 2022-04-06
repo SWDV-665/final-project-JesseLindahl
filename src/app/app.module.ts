@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GroceriesServiceService } from './groceries-service.service';
 import { InputDialogServiceService } from './input-dialog-service.service';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @NgModule({
   declarations: [AppComponent],
