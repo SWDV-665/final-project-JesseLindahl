@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { GroceriesServiceService } from './groceries-service.service';
 import { InputDialogServiceService } from './input-dialog-service.service';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
