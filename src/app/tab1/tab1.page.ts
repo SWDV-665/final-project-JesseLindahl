@@ -16,6 +16,9 @@ export class Tab1Page {
   title = "Grocery";
   socialSharing: any;
 
+  //calculates the current date
+  currentDate: number = Date.now()
+
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alertCtrl: AlertController, public dataService: GroceriesServiceService, public inputDialogService: InputDialogServiceService) {
 
   }
