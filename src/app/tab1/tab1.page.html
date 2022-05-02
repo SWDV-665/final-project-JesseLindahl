@@ -1,20 +1,23 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Grocery
-    </ion-title>
+    <ion-item lines="none">
+      <ion-label style="font-weight: 750; font-size: 3em">
+        Grocery List
+        <!-- style feature that provides the user with the current date -->
+        <p style="font-weight: 400; color: black;"> {{currentDate | date: 'fullDate'}}</p> 
+      </ion-label>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-
-
   <ion-list>
     <ion-item-sliding *ngFor="let item of loadItem(); let i = index">
       <ion-item>
-        <h2>{{item.name}}</h2>
-        <p>{{item.quantity}}</p>
+        <ion-icon size="small" name="ellipse"></ion-icon>
+          {{item.name}}
+          {{item.quantity}}
       </ion-item>
       <ion-item-options>
         <button (click)="editItem(item, i)" ion-button colors="primary" icon-start>
@@ -28,8 +31,8 @@
         </button>
 
         <button (click)="removeItem(item, i)" ion-button colors="secondary" icon-start>
-          <ion-icon name="trash"></ion-icon>
-          Done
+          <ion-icon name="checkmark"></ion-icon>
+          Check
         </button>
       </ion-item-options>
     </ion-item-sliding>
