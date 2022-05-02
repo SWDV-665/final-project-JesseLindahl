@@ -1,8 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      About
-    </ion-title>
+    <ion-item lines="none">
+      <ion-label style="font-weight: 750; font-size: 3em">
+        About the Student
+        <!-- style feature that provides the user with the current date -->
+        <p style="font-weight: 400; color: black;"> {{currentDate | date: 'fullDate'}}</p> 
+      </ion-label>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
